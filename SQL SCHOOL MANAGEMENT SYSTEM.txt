@@ -1,0 +1,42 @@
+
+
+CREATE TABLE Student (
+    StudentID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    DateOfBirth DATE NOT NULL,
+    ContactInformation VARCHAR(255));
+
+CREATE TABLE Classes (
+    ClassID INT AUTO_INCREMENT PRIMARY KEY,
+    ClassName VARCHAR(255) NOT NULL,
+    Schedule VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Courses (
+    CourseID INT AUTO_INCREMENT PRIMARY KEY,
+    CourseName VARCHAR(255) NOT NULL,
+    Credits INT NOT NULL
+);
+
+CREATE TABLE Grades (
+    GradeID INT AUTO_INCREMENT PRIMARY KEY,
+    StudentID INT NOT NULL,
+    CourseID INT NOT NULL,
+    Grade VARCHAR(2) NOT NULL,
+    CONSTRAINT fk_student FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
+    CONSTRAINT fk_course FOREIGN KEY (CourseID) REFERENCES Courses(CourseID));
+
+CREATE TABLE Teachers (
+    TeacherID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(255) NOT NULL,
+    SubjectTaught VARCHAR(255) NOT NULL,
+    ContactInformation VARCHAR(255));
+
+CREATE TABLE Attendance (
+    AttendanceID INT AUTO_INCREMENT PRIMARY KEY,
+    Date DATE NOT NULL,
+    StudentID INT NOT NULL,
+    ClassID INT NOT NULL,
+    Status ENUM('Present', 'Absent', 'Late') NOT NULL
+);
+
